@@ -1,3 +1,5 @@
+package priorities;
+
 import org.junit.Test;
 import priorities.Prioritizer;
 import priorities.PriorityItem;
