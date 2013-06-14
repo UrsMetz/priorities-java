@@ -1,8 +1,6 @@
 package priorities;
 
 import org.junit.Test;
-import priorities.Prioritizer;
-import priorities.PriorityItem;
 
 import java.util.Collections;
 
@@ -27,8 +25,8 @@ public class PrioritizerTest {
 
     @Test
     public void listOfTwoItemsWithDifferentPrioritiesShouldYieldTheHigherPrioritized() {
-        PriorityItem lowerPrioritized = new PriorityItem(NAME_IGNORED + "1", 1);
-        PriorityItem higherPrioritized = new PriorityItem(NAME_IGNORED + "2", 2);
+        PriorityItem lowerPrioritized = new PriorityItem("first item", 1);
+        PriorityItem higherPrioritized = new PriorityItem("second item", 2);
 
         assertThat(new Prioritizer(asList(lowerPrioritized, higherPrioritized)).proritize(), contains(higherPrioritized));
     }
@@ -36,7 +34,7 @@ public class PrioritizerTest {
     @Test
     public void listOfTwoItemsWithSamePriorityShouldYieldBothItems() throws Exception {
         PriorityItem item1 = new PriorityItem("first item", 1);
-        PriorityItem item2 = new PriorityItem("second item" + "2", 1);
+        PriorityItem item2 = new PriorityItem("second item", 1);
 
         assertThat(new Prioritizer(asList(item1, item2)).proritize(), containsInAnyOrder(item1, item2));
     }
