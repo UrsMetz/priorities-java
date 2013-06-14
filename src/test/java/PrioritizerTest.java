@@ -3,6 +3,7 @@ import priorities.PriorityItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -60,13 +61,16 @@ public class PrioritizerTest {
     }
 
     private int findMaxPriority(List<PriorityItem> items) {
-        int maxPriority = Integer.MIN_VALUE;
-        for (PriorityItem item : items) {
-            if (item.getPriority() > maxPriority) {
-                maxPriority = item.getPriority();
+        return Collections.max(items, compareByPriority()).getPriority();
+    }
+
+    private Comparator<PriorityItem> compareByPriority() {
+        return new Comparator<PriorityItem>() {
+            @Override
+            public int compare(PriorityItem o1, PriorityItem o2) {
+                return o1.getPriority() - o2.getPriority();
             }
-        }
-        return maxPriority;
+        };
     }
 
 }
