@@ -1,6 +1,7 @@
 import org.junit.Test;
 import priorities.PriorityItem;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,19 +27,46 @@ public class PrioritizerTest {
 
     @Test
     public void listOfTwoItemsWithDifferentPrioritiesShouldYieldTheHigherPrioritized() {
-        PriorityItem lowerPrioritized = new PriorityItem(NAME_IGNORED, 1);
-        PriorityItem higherPrioritized = new PriorityItem(NAME_IGNORED, 2);
+        PriorityItem lowerPrioritized = new PriorityItem(NAME_IGNORED + "1", 1);
+        PriorityItem higherPrioritized = new PriorityItem(NAME_IGNORED + "2", 2);
 
         assertThat(prioritize(asList(lowerPrioritized, higherPrioritized)), contains(higherPrioritized));
+    }
+
+    @Test
+    public void listOfTwoItemsWithSamePriorityShouldYieldBothItems() throws Exception {
+        PriorityItem item1 = new PriorityItem("first item", 1);
+        PriorityItem item2 = new PriorityItem("second item" + "2", 1);
+
+        assertThat(prioritize(asList(item1, item2)), containsInAnyOrder(item1, item2));
     }
 
     private List<PriorityItem> prioritize(List<PriorityItem> items) {
         if (items.isEmpty())
             return emptyList();
-        return lastElementAsList(items);
+        final int maxPriority = findMaxPriority(items);
+
+        return findAllWithPriority(items, maxPriority);
     }
 
-    private List<PriorityItem> lastElementAsList(List<PriorityItem> items) {
-        return asList(items.get(items.size() - 1));
+    private List<PriorityItem> findAllWithPriority(List<PriorityItem> items, int priority) {
+        List<PriorityItem> allWithGivenPriority = new ArrayList<PriorityItem>();
+        for (PriorityItem item : items) {
+            if (item.getPriority() == priority) {
+                allWithGivenPriority.add(item);
+            }
+        }
+        return allWithGivenPriority;
     }
+
+    private int findMaxPriority(List<PriorityItem> items) {
+        int maxPriority = Integer.MIN_VALUE;
+        for (PriorityItem item : items) {
+            if (item.getPriority() > maxPriority) {
+                maxPriority = item.getPriority();
+            }
+        }
+        return maxPriority;
+    }
+
 }

@@ -14,4 +14,8 @@ public class PriorityItem {
     public String toString() {
         return name + " - " + priority;
     }
+
+    public int getPriority() {
+        return priority;
+    }
 }
