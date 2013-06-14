@@ -11,9 +11,7 @@ import static org.hamcrest.Matchers.is;
 public class PrioritizerTest {
     @Test
     public void emptyListOfItemShouldYieldEmptyResult() {
-        List<PriorityItem> highestPriorityItem = prioritize(emptyList());
-
-        assertThat(highestPriorityItem , is(empty()));
+        assertThat(prioritize(emptyList()), is(empty()));
     }
 
     private List<PriorityItem> prioritize(List items) {
