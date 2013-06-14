@@ -1,20 +1,26 @@
 import org.junit.Test;
 import priorities.PriorityItem;
 
+import java.util.Collections;
 import java.util.List;
 
-import static java.util.Collections.emptyList;
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class PrioritizerTest {
     @Test
     public void emptyListOfItemShouldYieldEmptyResult() {
-        assertThat(prioritize(emptyList()), is(empty()));
+        assertThat(prioritize(Collections.<PriorityItem>emptyList()), is(empty()));
     }
 
-    private List<PriorityItem> prioritize(List items) {
-        return emptyList();  //To change body of created methods use File | Settings | File Templates.
+    @Test
+    public void listOfOneItemShouldYieldThatItem() {
+        PriorityItem item = new PriorityItem("bla", 1);
+        assertThat(prioritize(asList(item)), contains(item));
+    }
+
+    private List<PriorityItem> prioritize(List<PriorityItem> items) {
+        return items;
     }
 }
