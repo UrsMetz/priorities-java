@@ -21,14 +21,18 @@ public class Prioritizer {
     public List<PriorityItem> proritize() {
         if (items.isEmpty())
             return emptyList();
-        final int maxPriority = findMaxPriority(items);
+        final int maxPriority = findMaxPriorityInItems();
 
-        List<PriorityItem> allWithPriority = findAllWithPriority(items, maxPriority);
+        List<PriorityItem> allWithPriority = findAllItemsWithPriority(maxPriority);
         items.removeAll(allWithPriority);
         return allWithPriority;
     }
 
-    private List<PriorityItem> findAllWithPriority(List<PriorityItem> items, int priority) {
+    private int findMaxPriorityInItems() {
+        return Collections.max(items, compareByPriority()).getPriority();
+    }
+
+    private List<PriorityItem> findAllItemsWithPriority(int priority) {
         List<PriorityItem> allWithGivenPriority = new ArrayList<PriorityItem>();
         for (PriorityItem item : items) {
             if (item.getPriority() == priority) {
@@ -36,10 +40,6 @@ public class Prioritizer {
             }
         }
         return allWithGivenPriority;
-    }
-
-    private int findMaxPriority(List<PriorityItem> items) {
-        return Collections.max(items, compareByPriority()).getPriority();
     }
 
     private Comparator<PriorityItem> compareByPriority() {
