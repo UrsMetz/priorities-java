@@ -40,7 +40,7 @@ public class PrioritizerTest {
     }
 
     @Test
-    public void secondCallShouldGiveSecondHighestPriorizedItem() {
+    public void secondCallShouldGiveSecondHighestPrioritizedItem() {
         PriorityItem item1 = new PriorityItem("first item", 2);
         PriorityItem item2 = new PriorityItem("second item", 1);
 
