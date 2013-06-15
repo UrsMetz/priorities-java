@@ -32,11 +32,21 @@ public class PrioritizerTest {
     }
 
     @Test
-    public void listOfTwoItemsWithSamePriorityShouldYieldBothItems() throws Exception {
+    public void listOfTwoItemsWithSamePriorityShouldYieldBothItems() {
         PriorityItem item1 = new PriorityItem("first item", 1);
         PriorityItem item2 = new PriorityItem("second item", 1);
 
         assertThat(new Prioritizer(asList(item1, item2)).proritize(), containsInAnyOrder(item1, item2));
     }
 
+    @Test
+    public void secondCallShouldGiveSecondHighestPriorizedItem() {
+        PriorityItem item1 = new PriorityItem("first item", 2);
+        PriorityItem item2 = new PriorityItem("second item", 1);
+
+        Prioritizer underTest = new Prioritizer(asList(item1, item2));
+        underTest.proritize();
+
+        assertThat(underTest.proritize(), contains(item2));
+    }
 }

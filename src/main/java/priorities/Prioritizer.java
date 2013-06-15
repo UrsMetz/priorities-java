@@ -11,7 +11,11 @@ public class Prioritizer {
     private final List<PriorityItem> items;
 
     public Prioritizer(List<PriorityItem> items) {
-        this.items = items;
+        this.items = wrapInListOneCanRemoveItemsFrom(items);
+    }
+
+    private ArrayList<PriorityItem> wrapInListOneCanRemoveItemsFrom(List<PriorityItem> items) {
+        return new ArrayList<PriorityItem>(items);
     }
 
     public List<PriorityItem> proritize() {
@@ -19,7 +23,9 @@ public class Prioritizer {
             return emptyList();
         final int maxPriority = findMaxPriority(items);
 
-        return findAllWithPriority(items, maxPriority);
+        List<PriorityItem> allWithPriority = findAllWithPriority(items, maxPriority);
+        items.removeAll(allWithPriority);
+        return allWithPriority;
     }
 
     private List<PriorityItem> findAllWithPriority(List<PriorityItem> items, int priority) {
