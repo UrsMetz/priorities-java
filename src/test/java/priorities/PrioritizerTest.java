@@ -14,13 +14,13 @@ public class PrioritizerTest {
 
     @Test
     public void emptyListOfItemShouldYieldEmptyResult() {
-        assertThat(new Prioritizer(Collections.<PriorityItem>emptyList()).proritize(), is(empty()));
+        assertThat(new Prioritizer(Collections.<PriorityItem>emptyList()).prioritize(), is(empty()));
     }
 
     @Test
     public void listOfOneItemShouldYieldThatItem() {
         PriorityItem item = new PriorityItem(NAME_IGNORED, 1);
-        assertThat(new Prioritizer(asList(item)).proritize(), contains(item));
+        assertThat(new Prioritizer(asList(item)).prioritize(), contains(item));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class PrioritizerTest {
         PriorityItem lowerPrioritized = new PriorityItem("first item", 1);
         PriorityItem higherPrioritized = new PriorityItem("second item", 2);
 
-        assertThat(new Prioritizer(asList(lowerPrioritized, higherPrioritized)).proritize(), contains(higherPrioritized));
+        assertThat(new Prioritizer(asList(lowerPrioritized, higherPrioritized)).prioritize(), contains(higherPrioritized));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PrioritizerTest {
         PriorityItem item1 = new PriorityItem("first item", 1);
         PriorityItem item2 = new PriorityItem("second item", 1);
 
-        assertThat(new Prioritizer(asList(item1, item2)).proritize(), containsInAnyOrder(item1, item2));
+        assertThat(new Prioritizer(asList(item1, item2)).prioritize(), containsInAnyOrder(item1, item2));
     }
 
     @Test
@@ -45,8 +45,8 @@ public class PrioritizerTest {
         PriorityItem item2 = new PriorityItem("second item", 1);
 
         Prioritizer underTest = new Prioritizer(asList(item1, item2));
-        underTest.proritize();
+        underTest.prioritize();
 
-        assertThat(underTest.proritize(), contains(item2));
+        assertThat(underTest.prioritize(), contains(item2));
     }
 }

@@ -18,7 +18,7 @@ public class Prioritizer {
         return new ArrayList<PriorityItem>(items);
     }
 
-    public List<PriorityItem> proritize() {
+    public List<PriorityItem> prioritize() {
         if (items.isEmpty())
             return emptyList();
         final int maxPriority = findMaxPriorityInItems();
