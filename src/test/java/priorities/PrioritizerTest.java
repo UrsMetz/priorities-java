@@ -49,4 +49,17 @@ public class PrioritizerTest {
 
         assertThat(underTest.prioritize(), contains(item2));
     }
+
+    @Test
+    public void shouldReturnEmptyListWhenAllPrioritiesHaveBennDealtWith() throws Exception {
+        PriorityItem firstItem = new PriorityItem("first item", 2);
+        PriorityItem secondItem = new PriorityItem("second item", 1);
+
+        Prioritizer underTest = new Prioritizer(asList(firstItem, secondItem));
+        underTest.prioritize();
+        underTest.prioritize();
+
+        assertThat(underTest.prioritize(), is(empty()));
+        assertThat(underTest.prioritize(), is(empty()));
+    }
 }
