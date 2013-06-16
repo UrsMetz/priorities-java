@@ -11,7 +11,7 @@ The Priority is an integer number and a higher number indicates a higher priorit
 ## Examples
 
 The input is given in the form `item name - corresponding priority`.
-The numbers before the expected results signify the output after the nth invocation of our oracle. (nothing) represents the empty list
+The numbers before the expected results signify the output after the nth invocation of our oracle. `(nothing)` represents the empty list
 
 Input
 * Item 1 - 1
@@ -20,9 +20,9 @@ Should yield:
 
 1) Item 1
 
-2) (nothing)
+2) `(nothing)`
 
-3 - infinity) (nothing)
+3 - infinity) `(nothing)`
 
 Input
 * Item 1 - 3
@@ -37,7 +37,7 @@ Should yield:
 
 3) Item 3
 
-4 - infinity) (nothing)
+4 - infinity) `(nothing)`
 
 Input
 * Item 1 - 6
@@ -50,7 +50,7 @@ Should yield:
 
 2) Item 3
 
-3 - infinity) (nothing)
+3 - infinity) `(nothing)`
 
 Input
 * Item 1 - 4
@@ -66,4 +66,4 @@ Should yield:
 
 3) Item 4
 
-4 - infinity) (nothing)
+4 - infinity) `(nothing)`
