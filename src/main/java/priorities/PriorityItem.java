@@ -1,6 +1,6 @@
 package priorities;
 
-public class PriorityItem {
+public class PriorityItem implements Comparable<PriorityItem> {
     private final String name;
     private final int priority;
 
@@ -19,4 +19,8 @@ public class PriorityItem {
         return priority;
     }
 
+    @Override
+    public int compareTo(PriorityItem other) {
+        return this.priority - other.priority;
+    }
 }

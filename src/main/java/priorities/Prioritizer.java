@@ -2,7 +2,6 @@ package priorities;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -29,7 +28,7 @@ public class Prioritizer {
     }
 
     private int findMaxPriorityInItems() {
-        return Collections.max(items, compareByPriority()).getPriority();
+        return Collections.max(items).getPriority();
     }
 
     private List<PriorityItem> findAllItemsWithPriority(int priority) {
@@ -42,12 +41,4 @@ public class Prioritizer {
         return allWithGivenPriority;
     }
 
-    private Comparator<PriorityItem> compareByPriority() {
-        return new Comparator<PriorityItem>() {
-            @Override
-            public int compare(PriorityItem o1, PriorityItem o2) {
-                return o1.getPriority() - o2.getPriority();
-            }
-        };
-    }
 }
