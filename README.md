@@ -1,6 +1,6 @@
 # Priorities
 
-This projects aims at finding / practice finding a nice / clean / good solution to the following requirement:
+This projects aims at practice finding a solution to the following requirement:
 
 Given a list of items (identified i.e. by a name) having a priority.
 When asked to prioritize produce a list of those items that have the highest priority.
