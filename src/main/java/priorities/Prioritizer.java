@@ -1,44 +1,34 @@
 package priorities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.reverseOrder;
 
 public class Prioritizer {
-    private final List<PriorityItem> items;
+    private final PriorityQueue<PriorityItem> queue;
 
     public Prioritizer(List<PriorityItem> items) {
-        this.items = wrapInListOneCanRemoveItemsFrom(items);
-    }
-
-    private ArrayList<PriorityItem> wrapInListOneCanRemoveItemsFrom(List<PriorityItem> items) {
-        return new ArrayList<PriorityItem>(items);
+        int initialSize = (items.isEmpty()) ? 1 : items.size(); //cannot create a queue with size 0.
+        this.queue = new PriorityQueue<PriorityItem>(initialSize, reverseOrder());
+        this.queue.addAll(items);
     }
 
     public List<PriorityItem> prioritize() {
-        if (items.isEmpty())
+        if (queue.isEmpty())
             return emptyList();
-        final int maxPriority = findMaxPriorityInItems();
-
-        List<PriorityItem> allWithPriority = findAllItemsWithPriority(maxPriority);
-        items.removeAll(allWithPriority);
-        return allWithPriority;
+        else
+            return getAllItemsWithHighestPriority();
     }
 
-    private int findMaxPriorityInItems() {
-        return Collections.max(items).getPriority();
+    private List<PriorityItem> getAllItemsWithHighestPriority(){
+        List<PriorityItem> items = new ArrayList<PriorityItem>();
+        PriorityItem firstItem = queue.poll();
+        items.add(firstItem);
+        while (!queue.isEmpty() && (queue.peek().getPriority() == firstItem.getPriority()))
+            items.add(queue.poll());
+        return items;
     }
-
-    private List<PriorityItem> findAllItemsWithPriority(int priority) {
-        List<PriorityItem> allWithGivenPriority = new ArrayList<PriorityItem>();
-        for (PriorityItem item : items) {
-            if (item.getPriority() == priority) {
-                allWithGivenPriority.add(item);
-            }
-        }
-        return allWithGivenPriority;
-    }
-
 }
